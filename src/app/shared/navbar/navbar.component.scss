@@ -1,0 +1,46 @@
+@import "../../../variables.scss";
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 65px;
+  border-top: 2px solid $primary-light;
+
+  .social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    i {
+      width: 15px;
+      height: 15px;
+
+      font-size: 14px;
+      color: $gray-color;
+      cursor: pointer;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .submit-button {
+    padding: 5px 15px;
+    font-size: 13px;
+    background-color: $primary-color;
+    color: $primary-light;
+    border-radius: 7px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($primary-color, 15%);
+      transition: all 0.3s ease;
+    }
+  }
+}

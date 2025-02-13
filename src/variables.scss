@@ -1,0 +1,35 @@
+$primary-color: #fd7c47;
+$primary-light: #fff4ee;
+$gray-color: #687279;
+$font-color: #111518;
+$white-font-color: #fff;
+
+.container {
+  width: 70%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.button {
+  outline: none;
+  border: none;
+  font-size: 16px;
+  padding: 14px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+}
+
+.button-primary {
+  background-color: $primary-color;
+  color: $white-font-color;
+  border: 2px solid $primary-color;
+}
+
+.button-primary-outline {
+  background-color: $white-font-color;
+  color: $primary-color;
+  border: 2px solid $primary-color;
+}
