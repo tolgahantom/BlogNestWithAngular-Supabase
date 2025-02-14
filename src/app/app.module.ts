@@ -13,9 +13,11 @@ import { FootComponent } from './shared/foot/foot.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { MostViewedComponent } from './components/most-viewed/most-viewed.component';
 import { BlogWeekComponent } from './components/blog-week/blog-week.component';
+import { BlogCategoryComponent } from './components/blog-category/blog-category.component';
+import { MobilAppComponent } from './components/mobil-app/mobil-app.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, BlogDetailComponent, NavbarComponent, FootComponent, HeaderComponent, MostViewedComponent, BlogWeekComponent],
+  declarations: [AppComponent, HomePageComponent, BlogDetailComponent, NavbarComponent, FootComponent, HeaderComponent, MostViewedComponent, BlogWeekComponent, BlogCategoryComponent, MobilAppComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
