@@ -1,0 +1,76 @@
+@import "../../../variables.scss";
+
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 65px;
+
+  .main-title {
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .main-text {
+    color: $gray-color;
+    margin-bottom: 25px;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .bloggers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+
+    .blogger {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      img {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+      }
+
+      .blogger-name {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .blogger-title {
+        font-size: 16px;
+        color: $primary-color;
+      }
+
+      .blogger-socials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+        font-size: 20px;
+        i {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background-color: $primary-color;
+          color: #fff;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+
+          &:hover {
+            background-color: darken($primary-color, 10%);
+          }
+        }
+      }
+    }
+  }
+}

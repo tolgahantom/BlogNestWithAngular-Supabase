@@ -1,0 +1,46 @@
+@import "../../../variables.scss";
+
+.main {
+  height: 600px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  justify-content: center;
+  gap: 25px;
+  text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/chad-montano-eeqbbemH9-c-unsplash.jpeg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+
+  .secondary-title {
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .main-title {
+    font-size: 35px;
+    max-width: 800px;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    width: 100%;
+    margin-top: 35px;
+
+    .flex-item {
+      .number {
+        font-size: 40px;
+        color: $primary-color;
+        font-weight: bold;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
