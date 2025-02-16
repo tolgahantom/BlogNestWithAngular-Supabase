@@ -18,9 +18,12 @@ import { MobilAppComponent } from './components/mobil-app/mobil-app.component';
 import { OurCreatetorsComponent } from './components/our-createtors/our-createtors.component';
 import { ParallaxComponent } from './components/parallax/parallax.component';
 import { UpdateComponent } from './components/update/update.component';
+import { BlogFeaturesComponent } from './components/blog-features/blog-features.component';
+import { DetailComponent } from './components/detail/detail.component';
+import { BlogDetailCommentsComponent } from './components/blog-detail-comments/blog-detail-comments.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, BlogDetailComponent, NavbarComponent, FootComponent, HeaderComponent, MostViewedComponent, BlogWeekComponent, BlogCategoryComponent, MobilAppComponent, OurCreatetorsComponent, ParallaxComponent, UpdateComponent],
+  declarations: [AppComponent, HomePageComponent, BlogDetailComponent, NavbarComponent, FootComponent, HeaderComponent, MostViewedComponent, BlogWeekComponent, BlogCategoryComponent, MobilAppComponent, OurCreatetorsComponent, ParallaxComponent, UpdateComponent, BlogFeaturesComponent, DetailComponent, BlogDetailCommentsComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
