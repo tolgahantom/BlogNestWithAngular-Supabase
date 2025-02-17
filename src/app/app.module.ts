@@ -21,9 +21,32 @@ import { UpdateComponent } from './components/update/update.component';
 import { BlogFeaturesComponent } from './components/blog-features/blog-features.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { BlogDetailCommentsComponent } from './components/blog-detail-comments/blog-detail-comments.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { BlogListComponent } from './pages/blog-list/blog-list.component';
+import { BlogsComponent } from './components/blogs/blogs.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, BlogDetailComponent, NavbarComponent, FootComponent, HeaderComponent, MostViewedComponent, BlogWeekComponent, BlogCategoryComponent, MobilAppComponent, OurCreatetorsComponent, ParallaxComponent, UpdateComponent, BlogFeaturesComponent, DetailComponent, BlogDetailCommentsComponent],
+  declarations: [
+    AppComponent,
+    HomePageComponent,
+    BlogDetailComponent,
+    NavbarComponent,
+    FootComponent,
+    HeaderComponent,
+    MostViewedComponent,
+    BlogWeekComponent,
+    BlogCategoryComponent,
+    MobilAppComponent,
+    OurCreatetorsComponent,
+    ParallaxComponent,
+    UpdateComponent,
+    BlogFeaturesComponent,
+    DetailComponent,
+    BlogDetailCommentsComponent,
+    ModalComponent,
+    BlogListComponent,
+    BlogsComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],

@@ -1,0 +1,55 @@
+<div
+  class="modal-overlay"
+  *ngIf="modalService.modalOpen$ | async"
+  (click)="modalService.closeModal()"
+>
+  <!-- Buton overlay içinde -->
+  <button class="close-btn" (click)="modalService.closeModal()">✖</button>
+
+  <div
+    class="modal-content animate__animated animate__fadeInDown"
+    (click)="$event.stopPropagation()"
+  >
+    <h2 *ngIf="(modalService.mode$ | async) === 'login'">Giriş Yap</h2>
+    <h2 *ngIf="(modalService.mode$ | async) === 'register'">Kayıt Ol</h2>
+
+    <form *ngIf="(modalService.mode$ | async) === 'login'">
+      <div class="form-control">
+        <p class="form-text">Username or Email Adress</p>
+        <input type="email" />
+      </div>
+      <div class="form-control">
+        <p class="form-text">Password</p>
+        <input type="password" />
+      </div>
+      <div class="flex">
+        <div class="remember">
+          <input type="checkbox" />
+          <label for="remember">Remember Me</label>
+        </div>
+        <a class="reset-password">Forgot Password?</a>
+      </div>
+      <button type="submit" class="button button-primary">Giriş Yap</button>
+      <p>Hesabınız yok mu? <a (click)="setMode('register')">Kayıt olun</a></p>
+    </form>
+
+    <form *ngIf="(modalService.mode$ | async) === 'register'">
+      <div class="form-control">
+        <p class="form-text">Name Surname</p>
+        <input type="text" />
+      </div>
+      <div class="form-control">
+        <p class="form-text">Email</p>
+        <input type="email" />
+      </div>
+      <div class="form-control">
+        <p class="form-text">Password</p>
+        <input type="password" />
+      </div>
+      <button type="submit" class="button button-primary">Kayıt Ol</button>
+      <p>
+        Zaten hesabınız var mı? <a (click)="setMode('login')">Giriş yapın</a>
+      </p>
+    </form>
+  </div>
+</div>
