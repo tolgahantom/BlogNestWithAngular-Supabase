@@ -24,6 +24,8 @@ import { BlogDetailCommentsComponent } from './components/blog-detail-comments/b
 import { ModalComponent } from './shared/modal/modal.component';
 import { BlogListComponent } from './pages/blog-list/blog-list.component';
 import { BlogsComponent } from './components/blogs/blogs.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlogAddComponent } from './components/blog-add/blog-add.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +48,9 @@ import { BlogsComponent } from './components/blogs/blogs.component';
     ModalComponent,
     BlogListComponent,
     BlogsComponent,
+    BlogAddComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })

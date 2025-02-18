@@ -6,10 +6,12 @@
   </div>
 
   <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Blogs</a></li>
-    <li><a href="#">About</a></li>
+    <li><a [routerLink]="['']">Home</a></li>
+    <li><a [routerLink]="['blog-list']">Blogs</a></li>
+    @if(currentUser$ | async; as user){
+    <li><a [routerLink]="['blog-add']">Add Blog</a></li>
     <li><a href="#">Contact</a></li>
+    }
   </ul>
 
   <div class="submit-button">Submit Recipe</div>

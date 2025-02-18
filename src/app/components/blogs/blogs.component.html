@@ -1,7 +1,7 @@
 <div class="main">
   <div class="blog-list">
     @for (item of blogList; track $index) {
-    <div class="blog-card">
+    <div class="blog-card" [routerLink]="['/detail', item.id]">
       <img
         src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/ella-olsson-Pb9aFVR9-Bk-unsplash-500x375.jpg"
         class="blog-card-image"
@@ -26,7 +26,13 @@
     }
   </div>
   <div class="pagination">
-    <div class="prev pag-button">Prev <</div>
+    <div
+      class="prev pag-button"
+      (click)="changePage(selectedPage - 1)"
+      [ngStyle]="{ opacity: selectedPage === 1 ? '0' : '1' }"
+    >
+      Prev <
+    </div>
     <div class="pageNumbers">
       @for (item of getPageArray(); track $index) {
       <button
@@ -38,6 +44,12 @@
       </button>
       }
     </div>
-    <div class="next pag-button">Next ></div>
+    <div
+      class="next pag-button"
+      (click)="changePage(selectedPage + 1)"
+      [ngStyle]="{ opacity: selectedPage === numberOfPage ? '0' : '1' }"
+    >
+      Next >
+    </div>
   </div>
 </div>

@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
+import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +10,13 @@ import { ModalService } from '../../services/modal.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  constructor(private modalService: ModalService) {}
+  currentUser$: Observable<UserModel | null>;
+  constructor(
+    private modalService: ModalService,
+    private authService: AuthService
+  ) {
+    this.currentUser$ = this.authService.currentUser$;
+  }
 
   openLoginModal() {
     this.modalService.openModal('login');
@@ -19,5 +28,9 @@ export class HeaderComponent {
 
   closeModal() {
     this.modalService.closeModal();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

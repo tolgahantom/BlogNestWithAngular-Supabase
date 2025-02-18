@@ -3,7 +3,6 @@
   *ngIf="modalService.modalOpen$ | async"
   (click)="modalService.closeModal()"
 >
-  <!-- Buton overlay içinde -->
   <button class="close-btn" (click)="modalService.closeModal()">✖</button>
 
   <div
@@ -13,14 +12,18 @@
     <h2 *ngIf="(modalService.mode$ | async) === 'login'">Giriş Yap</h2>
     <h2 *ngIf="(modalService.mode$ | async) === 'register'">Kayıt Ol</h2>
 
-    <form *ngIf="(modalService.mode$ | async) === 'login'">
+    <form
+      *ngIf="(modalService.mode$ | async) === 'login'"
+      [formGroup]="loginForm"
+      (ngSubmit)="onLogin()"
+    >
       <div class="form-control">
         <p class="form-text">Username or Email Adress</p>
-        <input type="email" />
+        <input type="email" formControlName="emailLG" />
       </div>
       <div class="form-control">
         <p class="form-text">Password</p>
-        <input type="password" />
+        <input type="password" formControlName="passwordLG" />
       </div>
       <div class="flex">
         <div class="remember">
@@ -33,18 +36,22 @@
       <p>Hesabınız yok mu? <a (click)="setMode('register')">Kayıt olun</a></p>
     </form>
 
-    <form *ngIf="(modalService.mode$ | async) === 'register'">
+    <form
+      *ngIf="(modalService.mode$ | async) === 'register'"
+      [formGroup]="registerForm"
+      (ngSubmit)="onRegister()"
+    >
       <div class="form-control">
-        <p class="form-text">Name Surname</p>
-        <input type="text" />
+        <p class="form-text">Username</p>
+        <input type="text" formControlName="usernameRG" />
       </div>
       <div class="form-control">
         <p class="form-text">Email</p>
-        <input type="email" />
+        <input type="email" formControlName="emailRG" />
       </div>
       <div class="form-control">
         <p class="form-text">Password</p>
-        <input type="password" />
+        <input type="password" formControlName="passwordRG" />
       </div>
       <button type="submit" class="button button-primary">Kayıt Ol</button>
       <p>

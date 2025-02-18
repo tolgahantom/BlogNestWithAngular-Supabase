@@ -2,11 +2,18 @@
   <div class="search-icon">
     <i class="fa-solid fa-magnifying-glass"></i>
   </div>
-  <div class="brand">
+  <div class="brand" [routerLink]="['/']">
     <i class="fa-solid fa-dove"></i>
     <h1 class="brand-title">BlogNest</h1>
   </div>
+  @if(currentUser$ | async; as user){
+  <div class="login" (click)="logout()">
+    Hoş geldiniz, <strong>{{ user.username }}</strong
+    >!
+  </div>
+  }@else{
   <div class="login" (click)="openLoginModal()">
     <i class="fa-regular fa-user"></i>
   </div>
+  }
 </header>
