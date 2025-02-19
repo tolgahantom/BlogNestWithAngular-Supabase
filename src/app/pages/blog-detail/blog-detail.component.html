@@ -1,5 +1,14 @@
-<app-blog-features></app-blog-features>
+<app-blog-features
+  [title]="blog.blog_title"
+  [category]="blog.categories.name"
+  [author]="blog.users.username"
+  [uploadDate]="blog.upload_date"
+></app-blog-features>
 <div class="detail-container">
-  <app-detail></app-detail>
+  <app-detail
+    [content]="blog.blog_content"
+    [author]="blog.users.username"
+    [title]="blog.categories.name"
+  ></app-detail>
   <app-blog-detail-comments></app-blog-detail-comments>
 </div>

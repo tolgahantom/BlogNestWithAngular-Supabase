@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-blogs',
@@ -12,19 +13,26 @@ export class BlogsComponent implements OnInit {
   selectedPage: number = 1;
   numberOfPage: number = 0;
 
-  constructor(private blogService: BlogService) {}
+  constructor(
+    private blogService: BlogService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadBlogs();
-    this.numberOfPage = Math.ceil(
-      this.blogService.getTotalBlogCount() / this.productsPerPage
-    );
   }
 
   loadBlogs(): void {
     this.blogService
       .getAllBlogs(this.selectedPage, this.productsPerPage)
-      .subscribe((data) => (this.blogList = data));
+      .then((data) => {
+        this.blogList = data;
+        console.log(data);
+      });
+
+    this.blogService.getTotalBlogCount().then((count) => {
+      this.numberOfPage = Math.ceil(count / this.productsPerPage);
+    });
   }
 
   changePage(page: number): void {

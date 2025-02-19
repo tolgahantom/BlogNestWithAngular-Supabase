@@ -22,7 +22,7 @@ export class AuthService {
     }
   }
 
-  private async fetchUser(userId: string) {
+  async fetchUser(userId: string) {
     const { data, error } = await supabase
       .from('users')
       .select('id, username, email, role')
@@ -39,6 +39,8 @@ export class AuthService {
 
       this.currentUserSubject.next(user);
     }
+
+    return data;
   }
 
   async register(
