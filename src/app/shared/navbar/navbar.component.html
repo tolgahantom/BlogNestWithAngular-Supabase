@@ -10,8 +10,9 @@
     <li><a [routerLink]="['blog-list']">Blogs</a></li>
     @if(currentUser$ | async; as user){
     <li><a [routerLink]="['blog-add']">Add Blog</a></li>
-    <li><a href="#">Contact</a></li>
-    }
+    @if (user.role === 'admin') {
+    <li><a [routerLink]="['category-edit']">Add Category</a></li>
+    } }
   </ul>
 
   <div class="submit-button">Submit Recipe</div>

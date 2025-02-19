@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserModel } from '../../models/user.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-blog-add',
@@ -18,12 +19,14 @@ export class BlogAddComponent implements OnInit {
   blogForm: FormGroup;
   currentUser: UserModel | null = null;
   userSubscription: Subscription | undefined;
+  categories: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) {
     this.editor = new Editor();
     this.blogForm = this.fb.group({
@@ -33,10 +36,11 @@ export class BlogAddComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.userSubscription = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
+    this.categories = await this.categoryService.getAllCategories();
   }
 
   ngOnDestroy(): void {
@@ -53,7 +57,6 @@ export class BlogAddComponent implements OnInit {
       authorId: this.currentUser!.id,
       content: this.blogForm.value.content,
     };
-    console.log('clicked');
     console.log(blog);
     this.blogService
       .addBlog(blog)

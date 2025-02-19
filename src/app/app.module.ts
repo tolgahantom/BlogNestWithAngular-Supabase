@@ -27,6 +27,7 @@ import { BlogsComponent } from './components/blogs/blogs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogAddComponent } from './components/blog-add/blog-add.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NgxEditorModule } from 'ngx-editor';
     BlogListComponent,
     BlogsComponent,
     BlogAddComponent,
+    CategoryEditComponent,
   ],
   imports: [
     BrowserModule,

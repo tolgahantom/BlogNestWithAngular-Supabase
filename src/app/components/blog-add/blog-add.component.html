@@ -1,27 +1,29 @@
 <div class="main">
-  <h3 class="main-title">Blog Add</h3>
+  <h3 class="main-title">Blog Ekle</h3>
   <form [formGroup]="blogForm" (ngSubmit)="saveBlog()">
     <div class="form-group">
       <input
         type="text"
         class="input-field"
-        placeholder="Blog title here..."
+        placeholder="Blog başlığını giriniz..."
         formControlName="title"
       />
     </div>
     <div class="form-group">
-      <input
-        type="text"
-        class="input-field"
-        placeholder="Blog category here..."
-        formControlName="category"
-      />
+      <select formControlName="category">
+        <option value="" selected disabled>Bir Kategori Seç</option>
+        @for (category of categories; track category.id) {
+        <option [value]="category.id">
+          {{ category.name }}
+        </option>
+        }
+      </select>
     </div>
     <div class="form-group" style="min-height: 500px">
       <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
       <ngx-editor
         [editor]="editor"
-        [placeholder]="'Type here...'"
+        [placeholder]="'...'"
         style="min-height: 500px; width: 100%"
         formControlName="content"
       ></ngx-editor>
