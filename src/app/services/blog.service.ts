@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { supabase } from '../services/supabase-client.service';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -181,5 +182,25 @@ export class BlogService {
 
   getTotalBlogCount(): number {
     return this.blogArray.length;
+  }
+
+  async addBlog(blog: {
+    title: string;
+    category: string;
+    content: string;
+    authorId: string;
+  }) {
+    console.log('blog from service');
+    console.log(blog);
+    const { data, error } = await supabase.from('blogs').insert([
+      {
+        blog_title: blog.title,
+        blog_category: blog.category,
+        blog_content: blog.content,
+        author_id: blog.authorId,
+      },
+    ]);
+    if (error) throw error;
+    return data;
   }
 }

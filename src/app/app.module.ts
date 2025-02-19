@@ -26,6 +26,7 @@ import { BlogListComponent } from './pages/blog-list/blog-list.component';
 import { BlogsComponent } from './components/blogs/blogs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogAddComponent } from './components/blog-add/blog-add.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,14 @@ import { BlogAddComponent } from './components/blog-add/blog-add.component';
     BlogsComponent,
     BlogAddComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [provideClientHydration()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxEditorModule,
+  ],
+  providers: [provideClientHydration(), NgxEditorModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

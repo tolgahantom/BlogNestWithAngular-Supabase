@@ -32,6 +32,13 @@
           border-bottom: 1px solid $primary-color;
         }
       }
+
+      ::ng-deep ngx-editor .NgxEditor {
+        min-height: 500px !important;
+        height: auto !important;
+        overflow-y: auto;
+        width: 100%;
+      }
     }
   }
 }
