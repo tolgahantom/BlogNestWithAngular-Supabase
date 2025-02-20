@@ -29,7 +29,6 @@ export class BlogListComponent implements OnInit {
       .getAllBlogs(this.selectedPage, this.productsPerPage)
       .then((data) => {
         this.blogList = data;
-        console.log(data);
       });
 
     this.blogService.getTotalBlogCount().then((count) => {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -10,10 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 export class BlogDetailComponent {
   blog: any = null;
   blogId: string = '';
+  userId: string = '';
 
   constructor(
     private blogService: BlogService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -23,12 +26,20 @@ export class BlogDetailComponent {
         this.getBlogById(this.blogId);
       }
     });
+
+    this.authService.currentUser$.subscribe((user) => {
+      this.userId = user?.id || '';
+    });
   }
 
   getBlogById(id: string) {
     this.blogService.getBlogById(id).then((res) => {
       if (res) {
         this.blog = res[0];
+
+        if (this.userId && this.blogId) {
+          this.blogService.increaseViewCount(this.blogId, this.userId);
+        }
       }
     });
   }

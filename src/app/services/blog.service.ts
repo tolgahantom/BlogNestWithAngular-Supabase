@@ -100,4 +100,52 @@ export class BlogService {
     if (error) throw error;
     return data;
   }
+
+  async increaseViewCount(blogId: string, userId: string) {
+    const { data: existingView, error } = await supabase
+      .from('blog_views')
+      .select('id')
+      .eq('blog_id', blogId)
+      .eq('user_id', userId)
+      .single();
+
+    if (existingView) {
+      console.log('Kullanıcı zaten bu blogu okudu, views artırılmadı.');
+      return;
+    }
+
+    const { error: insertError } = await supabase
+      .from('blog_views')
+      .insert([{ blog_id: blogId, user_id: userId, viewed_at: new Date() }]);
+
+    if (insertError) {
+      console.error('Blog görüntüleme kaydı eklenemedi:', insertError.message);
+      return;
+    }
+
+    const { data: blogData, error: fetchError } = await supabase
+      .from('blogs')
+      .select('views')
+      .eq('id', blogId)
+      .single();
+
+    if (fetchError || !blogData) {
+      console.error(
+        'Mevcut görüntüleme sayısı alınamadı:',
+        fetchError?.message
+      );
+      return;
+    }
+
+    const newViewCount = (blogData.views || 0) + 1;
+
+    const { error: updateError } = await supabase
+      .from('blogs')
+      .update({ views: newViewCount })
+      .eq('id', blogId);
+
+    if (updateError) {
+      console.error('Görüntüleme sayısı artırılamadı:', updateError.message);
+    }
+  }
 }

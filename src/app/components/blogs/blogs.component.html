@@ -2,10 +2,7 @@
   <div class="blog-list">
     @for (item of blogList; track $index) {
     <div class="blog-card" [routerLink]="['/detail', item.id]">
-      <img
-        src="https://xrotyqpqvvqjdodahqnc.supabase.co/storage/v1/object/public/blog_images//1740039094964-Screenshot_1.png"
-        class="blog-card-image"
-      />
+      <img [src]="item.images" class="blog-card-image" />
       <div class="blog-card-content">
         <span class="blog-type">{{ item.categories.name }}</span>
         <h3 class="blog-title">
@@ -21,6 +18,10 @@
           <span class="point">.</span>
           <div class="date">
             {{ item.upload_date | date : "dd MMMM yyyy" : "tr-TR" }}
+          </div>
+          <div style="margin-left: auto">
+            <i class="fa-solid fa-eye"></i>
+            <span style="margin-left: 3px">{{ item.views }}</span>
           </div>
         </div>
       </div>
