@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { supabase } from '../services/supabase-client.service';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -50,20 +49,52 @@ export class BlogService {
     return data;
   }
 
-  async addBlog(blog: {
-    title: string;
-    category: string;
-    content: string;
-    authorId: string;
-  }) {
-    console.log('blog from service');
-    console.log(blog);
+  async uploadImage(file: File): Promise<string | null> {
+    if (!file) return null;
+
+    const fileName = `${new Date().getTime()}-${file.name}`;
+
+    const { data, error } = await supabase.storage
+      .from('blog_images')
+      .upload(fileName, file);
+
+    if (error) {
+      console.error('Resim yükleme hatası:', error);
+      return null;
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from('blog_images')
+      .getPublicUrl(fileName);
+
+    return publicUrlData.publicUrl || null;
+  }
+
+  async addBlog(
+    blog: {
+      title: string;
+      category: string;
+      content: string;
+      authorId: string;
+    },
+    file?: File
+  ) {
+    let imageUrl = 'https://via.placeholder.com/500';
+
+    if (file) {
+      const uploadedUrl = await this.uploadImage(file);
+      if (uploadedUrl) {
+        imageUrl = uploadedUrl;
+      }
+    }
+
     const { data, error } = await supabase.from('blogs').insert([
       {
         blog_title: blog.title,
         blog_category: blog.category,
         blog_content: blog.content,
         author_id: blog.authorId,
+        images: imageUrl,
       },
     ]);
     if (error) throw error;

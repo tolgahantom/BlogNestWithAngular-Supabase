@@ -30,7 +30,6 @@ export class BlogDetailComponent {
       if (res) {
         this.blog = res[0];
       }
-      console.log(this.blog);
     });
   }
 }

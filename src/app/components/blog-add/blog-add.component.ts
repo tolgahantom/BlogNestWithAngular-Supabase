@@ -20,6 +20,7 @@ export class BlogAddComponent implements OnInit {
   currentUser: UserModel | null = null;
   userSubscription: Subscription | undefined;
   categories: any[] = [];
+  selectedFile: File | undefined = undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -50,20 +51,27 @@ export class BlogAddComponent implements OnInit {
     }
   }
 
-  saveBlog() {
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      console.log('Seçilen dosya:', this.selectedFile);
+    } else {
+      console.warn('Dosya seçilmedi veya geçersiz dosya formatı.');
+    }
+  }
+
+  async saveBlog() {
     const blog = {
       title: this.blogForm.value.title,
       category: this.blogForm.value.category,
       authorId: this.currentUser!.id,
       content: this.blogForm.value.content,
     };
-    console.log(blog);
-    this.blogService
-      .addBlog(blog)
-      .then(() => {
-        alert('Blog Kaydedildi');
-        this.router.navigate(['']);
-      })
-      .catch((err) => console.log(err));
+
+    this.blogService.addBlog(blog, this.selectedFile).then((data) => {
+      alert('blog eklendi');
+      this.router.navigate(['']);
+    });
   }
 }

@@ -9,4 +9,5 @@ export class DetailComponent {
   @Input() title!: string;
   @Input() author!: string;
   @Input() content!: string;
+  @Input() imageUrl!: string;
 }
