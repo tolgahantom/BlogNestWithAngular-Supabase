@@ -3,6 +3,7 @@ import { ModalService } from '../../services/modal.service';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { UserModel } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ export class HeaderComponent {
 
   constructor(
     private modalService: ModalService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.currentUser$ = this.authService.currentUser$;
   }
@@ -34,5 +36,6 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['']);
   }
 }

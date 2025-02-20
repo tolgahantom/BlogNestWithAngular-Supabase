@@ -28,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogAddComponent } from './components/blog-add/blog-add.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { CategoryEditComponent } from './components/category-edit/category-edit.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CategoryEditComponent } from './components/category-edit/category-edit.
     BlogsComponent,
     BlogAddComponent,
     CategoryEditComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,34 +1,30 @@
-<div class="main">
+<div class="category-container">
   <div class="category-add">
-    <h2 class="category-add-title">Yeni Kategori Ekle</h2>
-    <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+    <h2 class="section-title">📌 Yeni Kategori Ekle</h2>
+    <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="form">
       <div class="form-group">
-        <p class="form-input">Kategori Adı :</p>
+        <label for="categoryName">Kategori Adı:</label>
         <input
           type="text"
+          id="categoryName"
           class="input-field"
-          placeholder="Kategori Adı Giriniz..."
+          placeholder="Kategori adı giriniz..."
           formControlName="name"
         />
       </div>
-      <button
-        class="button button-primary"
-        style="background-color: green; border: 1px solid green"
-      >
-        Kategori Ekle
-      </button>
+      <button type="submit" class="button button-primary">Ekle</button>
     </form>
   </div>
-  <div class="category-edit">
-    <h2 class="category-edit-title">Kategori Sil</h2>
+
+  <div class="category-list">
+    <h2 class="section-title">🗑️ Kategorileri Yönet</h2>
     <div class="categories">
       @for (category of categories; track $index) {
-
-      <div class="category">
+      <div class="category-card">
         <div class="category-name">{{ category.name }}</div>
-        <div class="category-process" (click)="deleteCategory(category.id)">
+        <button class="delete-btn" (click)="deleteCategory(category.id)">
           Kaldır
-        </div>
+        </button>
       </div>
       }
     </div>

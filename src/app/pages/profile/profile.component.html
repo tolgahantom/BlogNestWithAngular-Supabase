@@ -1,0 +1,36 @@
+@if(currentUser$ | async; as user){
+<div class="profile-container">
+  <div class="profile-header">
+    <h2>Profil Sayfası</h2>
+    <p>Merhaba, {{ user.username }}</p>
+  </div>
+
+  <div class="profile-section">
+    <h3>Okuduğun Bloglar</h3>
+    <div class="blog-list">
+      <div class="blog-card">
+        <img [src]="" alt="Blog Resmi" />
+        <h4>Blog Title</h4>
+        <p>Diğer</p>
+      </div>
+    </div>
+    <ng-template #noReadBlogs>
+      <p>Henüz blog okumadın.</p>
+    </ng-template>
+  </div>
+
+  <div class="profile-section">
+    <h3>Kendi Blogların</h3>
+    <div class="blog-list">
+      <div class="blog-card">
+        <img [src]="" alt="Blog Resmi" />
+        <h4>Blog Title</h4>
+        <p>Oyun</p>
+      </div>
+    </div>
+    <ng-template #noUserBlogs>
+      <p>Henüz bir blog yazmadın.</p>
+    </ng-template>
+  </div>
+</div>
+}

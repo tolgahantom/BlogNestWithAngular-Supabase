@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { supabase } from '../services/supabase-client.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
+import { Router, Routes } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,10 @@ export class AuthService {
 
   constructor() {
     this.loadUser();
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
   }
 
   private async loadUser() {
@@ -94,6 +99,11 @@ export class AuthService {
     const userId = data.user?.id;
     if (userId) {
       await this.fetchUser(userId);
+    }
+
+    const token = data.session?.access_token;
+    if (token) {
+      localStorage.setItem('token', token);
     }
 
     return data.user;
