@@ -15,6 +15,8 @@
     background-color: lighten($primary-color, 30%);
     border-radius: 2px;
     padding: 2px 8px;
+    max-width: 500px;
+    text-align: center;
   }
 
   .blog-title {
@@ -30,7 +32,7 @@
     justify-content: center;
     text-transform: uppercase;
     color: $primary-color;
-    font-size: 12px;
+    font-size: 15px;
     gap: 10px;
 
     .flex {

@@ -7,10 +7,18 @@
     <h1 class="brand-title">BlogNest</h1>
   </div>
   @if(currentUser$ | async; as user){
-  <div class="login" (click)="logout()">
+  <div class="login" (click)="isUserModalOpen = !isUserModalOpen">
     Hoş geldiniz, <strong>{{ user.username }}</strong
     >!
+
+    <div class="user-modal" [ngClass]="{ open: isUserModalOpen }">
+      <a class="profile"><i class="fa-solid fa-user"></i>Profili Gör</a>
+      <a class="logout" (click)="logout()"
+        ><i class="fa-solid fa-arrow-right-from-bracket"></i>Çıkış Yap</a
+      >
+    </div>
   </div>
+
   }@else{
   <div class="login" (click)="openLoginModal()">
     <i class="fa-regular fa-user"></i>

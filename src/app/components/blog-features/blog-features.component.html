@@ -1,3 +1,4 @@
+@if (title && category && author && uploadDate) {
 <div class="main">
   <span class="blog-category">{{ category }}</span>
   <h2 class="blog-title">{{ title }}</h2>
@@ -11,9 +12,23 @@
     </div>
     <span>/</span>
     <div class="flex">
-      <div class="date">{{ uploadDate }}</div>
+      <div class="date">{{ uploadDate | date : "dd MMMM yyyy" : "tr-TR" }}</div>
     </div>
     <span>/</span>
     <p class="number-of-comment">1 Comment</p>
   </div>
 </div>
+}@else {
+<div class="main">
+  <h2 class="blog-title">Blog List</h2>
+  <span class="blog-category"
+    >Macaroon I love ice cream bear claw icing jelly beans jelly-o gingerbread
+    cookie. Tootsie roll gummi bears liquorice brownie candy canes candy canes I
+    love soufflé bear claw.
+  </span>
+  <div class="author">
+    <a [routerLink]="['']" style="cursor: pointer">Home</a> >
+    <a style="color: gray">Blogs</a>
+  </div>
+</div>
+}

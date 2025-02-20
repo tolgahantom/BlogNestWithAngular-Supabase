@@ -12,7 +12,7 @@ export class BlogService {
 
     const { data, error } = await supabase
       .from('blogs')
-      .select(`*, users (id, username, email) `)
+      .select(`*, users (id, username, email), categories(name)`)
       .range(startIndex, endIndex);
 
     if (error) {

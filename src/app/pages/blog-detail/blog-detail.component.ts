@@ -20,8 +20,6 @@ export class BlogDetailComponent {
     this.router.paramMap.subscribe((params) => {
       this.blogId = params.get('id') || '';
       if (this.blogId) {
-        console.log('id alındı');
-        console.log(this.blogId);
         this.getBlogById(this.blogId);
       }
     });

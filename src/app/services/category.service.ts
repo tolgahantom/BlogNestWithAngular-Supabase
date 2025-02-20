@@ -9,7 +9,6 @@ export class CategoryService {
 
   async getAllCategories(): Promise<any[]> {
     const { data, error } = await supabase.from('categories').select('*');
-    console.log(data);
 
     if (error) {
       console.error('Kategori yükleme hatası:', error.message);

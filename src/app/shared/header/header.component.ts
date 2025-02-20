@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
@@ -11,6 +11,8 @@ import { UserModel } from '../../models/user.model';
 })
 export class HeaderComponent {
   currentUser$: Observable<UserModel | null>;
+  isUserModalOpen: boolean = false;
+
   constructor(
     private modalService: ModalService,
     private authService: AuthService

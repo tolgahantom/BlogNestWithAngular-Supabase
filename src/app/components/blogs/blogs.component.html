@@ -7,9 +7,9 @@
         class="blog-card-image"
       />
       <div class="blog-card-content">
-        <span class="blog-type">{{ item.blog_category }}</span>
+        <span class="blog-type">{{ item.categories.name }}</span>
         <h3 class="blog-title">
-          {{ item.title }}
+          {{ item.blog_title }}
         </h3>
 
         <div class="author">
@@ -19,37 +19,12 @@
           />
           <p class="author-name">{{ item.users.username }}</p>
           <span class="point">.</span>
-          <div class="date">{{ item.upload_date }}</div>
+          <div class="date">
+            {{ item.upload_date | date : "dd MMMM yyyy" : "tr-TR" }}
+          </div>
         </div>
       </div>
     </div>
     }
-  </div>
-  <div class="pagination">
-    <div
-      class="prev pag-button"
-      (click)="changePage(selectedPage - 1)"
-      [ngStyle]="{ opacity: selectedPage === 1 ? '0' : '1' }"
-    >
-      Prev <
-    </div>
-    <div class="pageNumbers">
-      @for (item of getPageArray(); track $index) {
-      <button
-        class="pageNumber"
-        (click)="changePage(item)"
-        [ngClass]="this.selectedPage === item ? 'active' : ''"
-      >
-        {{ item }}
-      </button>
-      }
-    </div>
-    <div
-      class="next pag-button"
-      (click)="changePage(selectedPage + 1)"
-      [ngStyle]="{ opacity: selectedPage === numberOfPage ? '0' : '1' }"
-    >
-      Next >
-    </div>
   </div>
 </div>
