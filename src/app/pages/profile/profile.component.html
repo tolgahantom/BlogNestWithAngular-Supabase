@@ -10,7 +10,7 @@
     @if (readBlogs.length > 0) {
     <div class="blog-list">
       @for (blog of readBlogs; track $index) {
-      <div class="blog-card">
+      <div class="blog-card" [routerLink]="['/detail', blog.blogs.id]">
         <h4>{{ blog.blogs.blog_title }}</h4>
         <p>{{ blog.blogs.categories.name }}</p>
       </div>

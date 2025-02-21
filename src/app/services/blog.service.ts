@@ -80,7 +80,8 @@ export class BlogService {
     },
     file?: File
   ) {
-    let imageUrl = 'https://via.placeholder.com/500';
+    let imageUrl =
+      'https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png';
 
     if (file) {
       const uploadedUrl = await this.uploadImage(file);
