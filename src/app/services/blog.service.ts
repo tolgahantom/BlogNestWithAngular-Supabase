@@ -12,6 +12,7 @@ export class BlogService {
     const { data, error } = await supabase
       .from('blogs')
       .select(`*, users (id, username, email), categories(name)`)
+      .order('upload_date', { ascending: false })
       .range(startIndex, endIndex);
 
     if (error) {
