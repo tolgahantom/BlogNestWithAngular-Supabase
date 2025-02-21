@@ -7,6 +7,7 @@ import { UserModel } from '../../models/user.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-blog-add',
@@ -27,7 +28,8 @@ export class BlogAddComponent implements OnInit {
     private blogService: BlogService,
     private authService: AuthService,
     private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private loaderService: LoaderService
   ) {
     this.editor = new Editor();
     this.blogForm = this.fb.group({
@@ -62,6 +64,7 @@ export class BlogAddComponent implements OnInit {
   }
 
   async saveBlog() {
+    this.loaderService.show();
     const blog = {
       title: this.blogForm.value.title,
       category: this.blogForm.value.category,
@@ -70,7 +73,7 @@ export class BlogAddComponent implements OnInit {
     };
 
     this.blogService.addBlog(blog, this.selectedFile).then((data) => {
-      alert('blog eklendi');
+      this.loaderService.hide();
       this.router.navigate(['']);
     });
   }

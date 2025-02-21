@@ -29,6 +29,7 @@ import { BlogAddComponent } from './components/blog-add/blog-add.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { CategoryEditComponent } from './components/category-edit/category-edit.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     BlogAddComponent,
     CategoryEditComponent,
     ProfileComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
