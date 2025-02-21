@@ -101,6 +101,29 @@ export class BlogService {
     return data;
   }
 
+  async getUserBlogs(userId: string) {
+    const { data: readBlogs, error: readError } = await supabase
+      .from('blog_views')
+      .select('blogs(*, categories(name))')
+      .eq('user_id', userId)
+      .order('viewed_at', { ascending: false });
+
+    const { data: writtenBlogs, error: writtenError } = await supabase
+      .from('blogs')
+      .select('*, categories(name)')
+      .eq('author_id', userId)
+      .order('upload_date', { ascending: false });
+
+    if (readError) console.error('Okunan blogları çekerken hata:', readError);
+    if (writtenError)
+      console.error('Yazılan blogları çekerken hata:', writtenError);
+
+    return {
+      readBlogs: readBlogs || [],
+      writtenBlogs: writtenBlogs || [],
+    };
+  }
+
   async increaseViewCount(blogId: string, userId: string) {
     const { data: existingView, error } = await supabase
       .from('blog_views')

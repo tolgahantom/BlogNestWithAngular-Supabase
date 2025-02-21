@@ -37,6 +37,14 @@
     display: inline-block;
     padding-bottom: 5px;
   }
+
+  .no-action {
+    color: red;
+    margin-top: 25px;
+    padding: 15px 25px;
+    border-radius: 15px;
+    background-color: lighten(red, 40%);
+  }
 }
 
 .blog-list {
@@ -52,6 +60,7 @@
   padding: 10px;
   transition: 0.3s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   img {
     width: 100%;

@@ -7,28 +7,34 @@
 
   <div class="profile-section">
     <h3>Okuduğun Bloglar</h3>
+    @if (readBlogs.length > 0) {
     <div class="blog-list">
+      @for (blog of readBlogs; track $index) {
       <div class="blog-card">
-        <h4>Blog Title</h4>
-        <p>Diğer</p>
+        <h4>{{ blog.blogs.blog_title }}</h4>
+        <p>{{ blog.blogs.categories.name }}</p>
       </div>
+      }
     </div>
-    <ng-template #noReadBlogs>
-      <p>Henüz blog okumadın.</p>
-    </ng-template>
+    }@else {
+    <p class="no-action">Henüz blog okumadın.</p>
+    }
   </div>
 
   <div class="profile-section">
     <h3>Kendi Blogların</h3>
+    @if(writtenBlogs.length > 0){
     <div class="blog-list">
-      <div class="blog-card">
-        <h4>Blog Title</h4>
-        <p>Oyun</p>
+      @for (blog of writtenBlogs; track $index) {
+      <div class="blog-card" [routerLink]="['/detail', blog.id]">
+        <h4>{{ blog.blog_title }}</h4>
+        <p>{{ blog.categories.name }}</p>
       </div>
+      }
     </div>
-    <ng-template #noUserBlogs>
-      <p>Henüz bir blog yazmadın.</p>
-    </ng-template>
+    }@else {
+    <p class="no-action">Henüz bir blog yazmadın.</p>
+    }
   </div>
 </div>
 }
