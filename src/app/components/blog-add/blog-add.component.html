@@ -1,6 +1,8 @@
 <app-loader></app-loader>
 <div class="main">
-  <h3 class="main-title">Blog Ekle</h3>
+  <h3 class="main-title">
+    @if (!isEditing) { Blog Ekle }@else { Blog Düzenle }
+  </h3>
   <form [formGroup]="blogForm" (ngSubmit)="saveBlog()">
     <div class="form-group">
       <input
@@ -32,6 +34,8 @@
         formControlName="content"
       ></ngx-editor>
     </div>
-    <button class="button button-primary">Add a New Blog</button>
+    <button class="button button-primary">
+      @if (!isEditing) { Blog Ekle }@else{ Düzenle }
+    </button>
   </form>
 </div>

@@ -4,6 +4,9 @@
     <h2>Profil Sayfası</h2>
     <p>Merhaba, {{ user.username }}</p>
   </div>
+  <app-loader></app-loader>
+
+  @if(!loaderService.isLoading){
 
   <div class="profile-section">
     <h3>Okuduğun Bloglar</h3>
@@ -29,6 +32,10 @@
       <div class="blog-card" [routerLink]="['/detail', blog.id]">
         <h4>{{ blog.blog_title }}</h4>
         <p>{{ blog.categories.name }}</p>
+        <i
+          class="fa-solid fa-pen edit-icon"
+          [routerLink]="['/blog-add', blog.id]"
+        ></i>
       </div>
       }
     </div>
@@ -36,5 +43,6 @@
     <p class="no-action">Henüz bir blog yazmadın.</p>
     }
   </div>
+  }
 </div>
 }

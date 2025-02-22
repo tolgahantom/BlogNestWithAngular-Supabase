@@ -173,4 +173,38 @@ export class BlogService {
       console.error('Görüntüleme sayısı artırılamadı:', updateError.message);
     }
   }
+
+  async editBlog(blogId: string, updatedBlog: any, newFile?: File) {
+    try {
+      let imageUrl = updatedBlog.images;
+      console.log(updatedBlog);
+
+      if (newFile) {
+        console.log('Yeni dosya yükleniyor...');
+        const res = await this.uploadImage(newFile);
+        if (res) {
+          console.log('eski resmi silsen iyi olur kanka');
+          imageUrl = res;
+        }
+      }
+
+      const { error: updateError } = await supabase
+        .from('blogs')
+        .update({
+          blog_title: updatedBlog.title,
+          blog_category: updatedBlog.category,
+          blog_content: updatedBlog.content,
+          author_id: updatedBlog.authorId,
+          images: imageUrl,
+        })
+        .eq('id', blogId);
+
+      if (updateError) throw updateError;
+
+      return { success: true };
+    } catch (error) {
+      console.error('Blog güncelleme hatası:', error);
+      return { success: false, error };
+    }
+  }
 }

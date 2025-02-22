@@ -5,7 +5,7 @@ import { BlogService } from '../../services/blog.service';
 import { AuthService } from '../../services/auth.service';
 import { UserModel } from '../../models/user.model';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { LoaderService } from '../../services/loader.service';
 
@@ -22,6 +22,8 @@ export class BlogAddComponent implements OnInit {
   userSubscription: Subscription | undefined;
   categories: any[] = [];
   selectedFile: File | undefined = undefined;
+  isEditing = false;
+  blogId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +31,8 @@ export class BlogAddComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private categoryService: CategoryService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.editor = new Editor();
     this.blogForm = this.fb.group({
@@ -44,6 +47,20 @@ export class BlogAddComponent implements OnInit {
       this.currentUser = user;
     });
     this.categories = await this.categoryService.getAllCategories();
+    this.blogId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.blogId) {
+      this.isEditing = true;
+      const blog = await this.blogService.getBlogById(this.blogId);
+      if (blog) {
+        console.log(blog[0]);
+
+        this.blogForm.patchValue({
+          title: blog[0].blog_title,
+          category: blog[0].blog_category,
+          content: blog[0].blog_content,
+        });
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -72,9 +89,18 @@ export class BlogAddComponent implements OnInit {
       content: this.blogForm.value.content,
     };
 
-    this.blogService.addBlog(blog, this.selectedFile).then((data) => {
-      this.loaderService.hide();
-      this.router.navigate(['']);
-    });
+    if (!this.isEditing) {
+      this.blogService.addBlog(blog, this.selectedFile).then((data) => {
+        this.loaderService.hide();
+        this.router.navigate(['blog-list']);
+      });
+    } else {
+      this.blogService
+        .editBlog(this.blogId!, blog, this.selectedFile! || null)
+        .then((data) => {
+          this.loaderService.hide();
+          this.router.navigate(['blog-list']);
+        });
+    }
   }
 }
