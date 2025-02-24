@@ -23,6 +23,36 @@ export class BlogService {
     return data;
   }
 
+  async getLastBlog() {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`*, users (id, username, email), categories(name)`)
+      .order('upload_date', { ascending: false })
+      .limit(1);
+
+    if (error) {
+      console.error('Error fetching latest blog:', error);
+      return null;
+    }
+
+    return data;
+  }
+
+  async getMostReadBlog() {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`*, users (id, username, email), categories(name)`)
+      .order('views', { ascending: false })
+      .limit(3);
+
+    if (error) {
+      console.error('En çok okunan blog getirilemedi:', error);
+      return null;
+    }
+
+    return data;
+  }
+
   async getTotalBlogCount(): Promise<number> {
     const { count, error } = await supabase
       .from('blogs')
@@ -177,7 +207,6 @@ export class BlogService {
   async editBlog(blogId: string, updatedBlog: any, newFile?: File) {
     try {
       let imageUrl = updatedBlog.images;
-      console.log(updatedBlog);
 
       if (newFile) {
         console.log('Yeni dosya yükleniyor...');

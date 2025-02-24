@@ -1,41 +1,30 @@
 <div class="main">
   <div class="content">
-    <div class="content-type">Recipe of the day</div>
-    <h2 class="content-title">Tasty Fluffy Pancakes</h2>
+    <div class="content-type">Son Yüklenen Blog</div>
+    <h2 class="content-title">{{ lastBlog.blog_title }}</h2>
     <div class="author-blog">
       <div class="author">
-        <div class="author-name-image">
-          <img
-            src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/autor-avatar@2x.png"
-            class="author-image"
-          />
-          <p class="author-name">By Rachel Bradley</p>
-        </div>
+        <img
+          src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/autor-avatar@2x.png"
+          class="author-image"
+        />
+        <p class="author-name">{{ lastBlog.users.username }}</p>
       </div>
       <div class="blog">
         <div class="blog-icon">
-          <i class="fa-regular fa-clock"></i>
+          <i class="fa-regular fa-eye"></i>
         </div>
-        <div class="blog-visible-count">1 hour and 30 mins</div>
+        <div class="blog-visible-count">{{ lastBlog.views }}</div>
       </div>
     </div>
-    <p class="blog-preview">
-      The Best Fluffy Pancakes recipe you will fall in love with. Full of tips
-      and tricks to help you make the best pancakes… ever!
-    </p>
     <div class="buttons">
-      <button class="button button-primary">
-        <i class="fa-regular fa-clock"></i>
-        <p>Cook Now</p>
-      </button>
-      <button class="button button-primary-outline">
-        <i class="fa-regular fa-clock"></i>
-        <p>Explore Recipes</p>
+      <button
+        class="button button-primary"
+        [routerLink]="['/detail', lastBlog.id]"
+      >
+        <p>Blog Detay</p>
       </button>
     </div>
   </div>
-  <img
-    src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/chad-montano-eeqbbemH9-c-unsplash.jpeg"
-    alt=""
-  />
+  <img [src]="lastBlog.images" alt="" />
 </div>

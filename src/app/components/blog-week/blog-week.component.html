@@ -6,69 +6,28 @@
     Phasellus a auctor lacus.
   </p>
   <div class="blog-list">
+    @for (blog of blogs; track $index) {
     <div class="blog">
-      <img
-        src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/ella-olsson-Pb9aFVR9-Bk-unsplash-500x375.jpg"
-        class="blog-image"
-      />
+      <img [src]="blog.images" class="blog-image" />
       <div class="blog-content">
-        <div class="blog-type">Aperitives</div>
+        <div class="blog-type">{{ blog.categories.name }}</div>
         <h3 class="blog-title">
-          Topping Marzipan Tart Cheesecake Sweet Lollipop
+          {{ blog.blog_title }}
         </h3>
         <div class="author">
           <img
             src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/autor-1@2x.png"
             class="author-image"
           />
-          <p class="author-name">Amıe</p>
+          <p class="author-name">{{ blog.users.username }}</p>
           <span class="point">.</span>
-          <div class="date">April 16, 2021</div>
+          <div class="date">
+            {{ blog.upload_date | date : "dd MMMM yyyy, HH:mm" }}
+          </div>
         </div>
       </div>
     </div>
-    <div class="blog">
-      <img
-        src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/ella-olsson-Pb9aFVR9-Bk-unsplash-500x375.jpg"
-        class="blog-image"
-      />
-      <div class="blog-content">
-        <div class="blog-type">Aperitives</div>
-        <h3 class="blog-title">
-          Topping Marzipan Tart Cheesecake Sweet Lollipop
-        </h3>
-        <div class="author">
-          <img
-            src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/autor-1@2x.png"
-            class="author-image"
-          />
-          <p class="author-name">Amıe</p>
-          <span class="point">.</span>
-          <div class="date">April 16, 2021</div>
-        </div>
-      </div>
-    </div>
-    <div class="blog">
-      <img
-        src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/ella-olsson-Pb9aFVR9-Bk-unsplash-500x375.jpg"
-        class="blog-image"
-      />
-      <div class="blog-content">
-        <div class="blog-type">Aperitives</div>
-        <h3 class="blog-title">
-          Topping Marzipan Tart Cheesecake Sweet Lollipop
-        </h3>
-        <div class="author">
-          <img
-            src="https://startersites.io/blocksy/tasty/wp-content/uploads/2021/04/autor-1@2x.png"
-            class="author-image"
-          />
-          <p class="author-name">Amıe</p>
-          <span class="point">.</span>
-          <div class="date">April 16, 2021</div>
-        </div>
-      </div>
-    </div>
+    }
   </div>
   <button class="button button-primary" [routerLink]="['blog-list']">
     View All Blogs
