@@ -12,7 +12,9 @@
         <div class="top">
           <h5 class="commenter">{{ comment.users.username }}</h5>
           <div class="flexible">
-            <span class="date">{{ comment.date }}</span>
+            <span class="date">{{
+              comment.created_at | date : "dd MMMM yyyy, HH:mm" : "tr"
+            }}</span>
             <span class="reply">Reply</span>
           </div>
         </div>
@@ -27,13 +29,13 @@
   </div>
 
   <div class="add-comment">
-    <h2>Leave a Replys</h2>
+    <h2>Bir Yorum Bırak</h2>
 
-    <form>
+    <form [formGroup]="commentForm" (ngSubmit)="addComment()">
       <div class="form-bottom">
-        <textarea placeholder="Add Comment"></textarea>
+        <textarea placeholder="Yorum ekle" formControlName="content"></textarea>
       </div>
-      <button class="button button-primary">Post Comment</button>
+      <button class="button button-primary">Yorum Yap</button>
     </form>
   </div>
 </div>

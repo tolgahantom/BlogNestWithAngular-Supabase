@@ -24,6 +24,7 @@
       align-items: flex-start;
       gap: 25px;
       border-bottom: 1px dashed $gray-color;
+      width: 100%;
 
       .comment-image {
         width: 50px;
@@ -37,6 +38,7 @@
         align-items: flex-start;
         font-size: 16px;
         color: $gray-color;
+        width: 100%;
 
         .top {
           width: 100%;
