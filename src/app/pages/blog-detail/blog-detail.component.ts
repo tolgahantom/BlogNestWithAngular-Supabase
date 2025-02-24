@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class BlogDetailComponent {
   blog: any = null;
-  blogId: string = '';
+  public blogId: string = '';
   userId: string = '';
 
   constructor(

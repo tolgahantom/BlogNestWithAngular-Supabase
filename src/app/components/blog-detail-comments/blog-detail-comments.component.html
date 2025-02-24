@@ -2,6 +2,7 @@
   <h3 class="comment-title">One Comment</h3>
 
   <div class="comments">
+    @for (comment of comments; track $index) {
     <div class="comment">
       <img
         class="comment-image"
@@ -9,44 +10,28 @@
       />
       <div class="comment-content">
         <div class="top">
-          <h5 class="commenter">Tasty</h5>
+          <h5 class="commenter">{{ comment.users.username }}</h5>
           <div class="flexible">
-            <span class="date">April 16, 2021</span>
+            <span class="date">{{ comment.date }}</span>
             <span class="reply">Reply</span>
           </div>
         </div>
         <div class="bottom">
           <p>
-            Candy tiramisu tart icing cookie candy canes danish icing. I love
-            sesame snaps dessert oat cake cupcake apple pie I love.
-          </p>
-          <p>
-            Macaroon toffee cake gummi bears soufflé candy soufflé sesame snaps.
-            Croissant caramels candy canes fruitcake.
+            {{ comment.content }}
           </p>
         </div>
       </div>
     </div>
+    }
   </div>
 
   <div class="add-comment">
     <h2>Leave a Replys</h2>
-    <p>
-      Your email address will not be published. Required fields are marked *
-    </p>
 
     <form>
-      <div class="form-top">
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Email" />
-        <input type="text" placeholder="Email" />
-      </div>
       <div class="form-bottom">
         <textarea placeholder="Add Comment"></textarea>
-      </div>
-      <div class="checkbox">
-        <input type="checkbox" />Save my name, email, and website in this
-        browser for the next time I comment.
       </div>
       <button class="button button-primary">Post Comment</button>
     </form>
