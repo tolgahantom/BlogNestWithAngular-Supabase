@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '../../services/comment.service';
-import { Observable } from 'rxjs';
-import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -11,11 +9,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './blog-detail-comments.component.scss',
 })
 export class BlogDetailCommentsComponent implements OnInit {
-  comments: any[] = [];
-  commentForm: FormGroup;
   @Input() id: any;
   @Input() blogId: any;
+  comments: any[] = [];
+  commentForm: FormGroup;
   userId: string = '';
+  replyInputOpen: { [key: number]: boolean } = {};
+  replyContent: string = '';
 
   constructor(
     private commentService: CommentService,
@@ -41,6 +41,7 @@ export class BlogDetailCommentsComponent implements OnInit {
   fetchComments() {
     this.commentService.getComments(this.id).then((data) => {
       this.comments = data;
+      console.log(data);
     });
   }
 
@@ -50,6 +51,20 @@ export class BlogDetailCommentsComponent implements OnInit {
       .then((data) => {
         this.fetchComments();
         this.commentForm.reset();
+      });
+  }
+
+  toggleReplyInput(commentId: any) {
+    this.replyInputOpen[commentId] = !this.replyInputOpen[commentId];
+  }
+
+  submitReply(commentid: string) {
+    this.commentService
+      .addComment(this.blogId, this.userId, this.replyContent, commentid)
+      .then((data) => {
+        this.replyContent = '';
+        this.toggleReplyInput(commentid);
+        this.fetchComments();
       });
   }
 }

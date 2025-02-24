@@ -15,7 +15,9 @@
             <span class="date">{{
               comment.created_at | date : "dd MMMM yyyy, HH:mm" : "tr"
             }}</span>
-            <span class="reply">Reply</span>
+            <span class="reply" (click)="toggleReplyInput(comment.id)"
+              >Cevapla</span
+            >
           </div>
         </div>
         <div class="bottom">
@@ -25,7 +27,42 @@
         </div>
       </div>
     </div>
-    }
+
+    @if(comment.replies.length > 0){ @for (reply of comment.replies; track
+    $index) {
+    <div class="comment" style="margin-left: 50px">
+      <img
+        class="comment-image"
+        src="https://secure.gravatar.com/avatar/efb25e5b3c34bbf561a0792a7fddcac0?s=100&d=mm&r=g"
+      />
+      <div class="comment-content">
+        <div class="top">
+          <h5 class="commenter">{{ reply.users.username }}</h5>
+          <div class="flexible">
+            <span class="date">{{
+              reply.created_at | date : "dd MMMM yyyy, HH:mm" : "tr"
+            }}</span>
+            <span class="reply" (click)="toggleReplyInput(comment.id)"
+              >Cevapla</span
+            >
+          </div>
+        </div>
+        <div class="bottom">
+          <p>
+            {{ reply.content }}
+          </p>
+        </div>
+      </div>
+    </div>
+    } } @if(replyInputOpen[comment.id]){
+    <div class="reply-box">
+      <textarea
+        [(ngModel)]="replyContent"
+        placeholder="Yanıtınızı yazın"
+      ></textarea>
+      <button (click)="submitReply(comment.id)">Gönder</button>
+    </div>
+    } }
   </div>
 
   <div class="add-comment">

@@ -27,16 +27,37 @@ export class CommentService {
   }
 
   async getComments(blogId: string) {
-    const { data, error } = await supabase
+    const { data: comments, error } = await supabase
       .from('comments')
       .select('*, users(username)')
       .eq('blog_id', blogId)
+      .is('parent_id', null)
       .order('created_at', { ascending: true });
 
     if (error) {
       console.error('Yorumları alma hatası:', error);
       return [];
     }
+
+    for (const comment of comments) {
+      comment.replies = await this.getRepliesForComment(comment.id);
+    }
+
+    return comments;
+  }
+
+  async getRepliesForComment(parentId: string) {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*, users(username)')
+      .eq('parent_id', parentId)
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.error('Yanıtlar çekilemedi:', error);
+      return [];
+    }
+
     return data;
   }
 }
