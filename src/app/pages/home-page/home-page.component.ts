@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +10,11 @@ import { BlogService } from '../../services/blog.service';
 export class HomePageComponent implements OnInit {
   lastBlog: any;
   mostReadBlogs: any;
-  constructor(public blogService: BlogService) {}
+  categories: any[] = [];
+  constructor(
+    public blogService: BlogService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.blogService.getLastBlog().then((data) => {
@@ -21,6 +26,10 @@ export class HomePageComponent implements OnInit {
       if (data) {
         this.mostReadBlogs = data;
       }
+    });
+
+    this.categoryService.getAllCategories().then((data) => {
+      this.categories = data;
     });
   }
 }

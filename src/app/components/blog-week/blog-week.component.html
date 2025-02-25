@@ -7,7 +7,7 @@
   </p>
   <div class="blog-list">
     @for (blog of blogs; track $index) {
-    <div class="blog">
+    <div class="blog" [routerLink]="['/detail', blog.id]">
       <img [src]="blog.images" class="blog-image" />
       <div class="blog-content">
         <div class="blog-type">{{ blog.categories.name }}</div>

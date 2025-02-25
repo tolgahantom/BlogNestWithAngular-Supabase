@@ -41,7 +41,6 @@ export class BlogDetailCommentsComponent implements OnInit {
   fetchComments() {
     this.commentService.getComments(this.id).then((data) => {
       this.comments = data;
-      console.log(data);
     });
   }
 
